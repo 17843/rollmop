@@ -1,0 +1,14 @@
+Package: rollmop
+Type: Package
+Title: OLAP connectivity
+Version: 0.1
+Date: 2014-10-15
+Author: Arvid Kristiansson
+Maintainer: Arvid Kristiansson <arvid.kristiansson@gmail.com>
+Description: Provides an interface to online analytical data sources, e.g. SQL
+    Server analysis services (SSAS).
+License: What license is it under?
+Depends:
+    rClr
+Imports:
+    rClr
