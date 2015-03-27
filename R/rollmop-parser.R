@@ -11,7 +11,7 @@ olapExecute <- function(cmd) {
     rClr::clrCall(cmd@.cache$parser, "executeAndParse")
   }
   if (exists("parser", envir = cmd@.cache) && class(cmd@.cache$parser) == "cobjRef") {
-    return(TRUE)
+    return(cmd@.cache$parser) # prev TRUE
   } else {
     clrCmd <- as(cmd, "cobjRef")
     if (try(exec(clrCmd), silent = TRUE) != TRUE) {
@@ -19,7 +19,7 @@ olapExecute <- function(cmd) {
       e   <- simpleError(gsub("Message: ", "", msg[2], fixed = TRUE))
       stop(e)      
     } else {
-      return(TRUE)
+      return(cmd@.cache$parser)
     }
   }
 }

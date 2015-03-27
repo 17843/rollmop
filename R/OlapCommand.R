@@ -61,6 +61,22 @@ setMethod("as.data.frame", "OlapCommand",
 )
 
 #' @export
+olapCommand2Df <- function(x, row.names = NULL, optional = FALSE, ..., stringsAsFactors = default.stringsAsFactors(), resolveClasses = TRUE) {
+  if (exists("parser", envir = x@.cache) && class(x@.cache$parser) == "cobjRef") {
+    result <- parseAsList(x@.cache$parser, resolveClasses = resolveClasses) # add this list to cache?
+  } else {
+    parser <- olapExecute(x)
+    result <- parseAsList(parser, resolveClasses = resolveClasses)
+  }
+  as.data.frame(result,
+                row.names = row.names,
+                optional = optional,
+                ..., 
+                stringsAsFactors = stringsAsFactors)            
+}
+
+
+#' @export
 setMethod("as.list", "OlapCommand", 
           function(x, ..., resolveClasses = TRUE) {
             if (exists("parser", envir = x@.cache) && class(x@.cache$parser) == "cobjRef") {
